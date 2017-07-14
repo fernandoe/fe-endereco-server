@@ -1,7 +1,8 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from fe_endereco.views import ServiceCEPAPIView, EnderecoModelViewSet
 from rest_framework_nested import routers
+
+from fe_endereco.views import ServiceCEPAPIView, EnderecoModelViewSet
 
 router = routers.SimpleRouter()
 router.register(r'enderecos', EnderecoModelViewSet, base_name="enderecos")

@@ -1,18 +1,17 @@
-# -*- coding:utf-8 -*-
-import uuid as uuid__
+import uuid
 
 import factory
 from faker import Factory
+from fe_core.tests.factories import EntityFactory
 
 from fe_endereco.models import Endereco
 
 fake = Factory.create('pt_BR')
 
 
-
 class EnderecoFactory(factory.django.DjangoModelFactory):
-    uuid = uuid__.uuid4()
-    entidade = uuid__.uuid4()
+    uuid = factory.Sequence(lambda n: str(uuid.uuid4()))
+    entidade = factory.SubFactory(EntityFactory)
     logradouro = fake.street_address()
     cep = fake.building_number()
     numero = fake.building_number()
