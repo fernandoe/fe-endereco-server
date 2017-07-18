@@ -84,7 +84,7 @@ class TestEnderecoModelViewSet(TestCase):
         self.assertTrue('estado' in entidade)
         self.assertEqual(10, len(entidade))
 
-    def test_update_with_user(self):
+    def test_update_with_user_with_patch(self):
         endereco = EnderecoFactory(usuario=self.user)
         response = self.client.patch(reverse('enderecos-detail', kwargs={'pk': str(endereco.uuid)}), {
             'cidade': 'ABC'
@@ -92,6 +92,25 @@ class TestEnderecoModelViewSet(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         endereco.refresh_from_db()
         self.assertEqual(endereco.cidade, 'ABC')
+
+    def test_update_with_user_with_put(self):
+        endereco = EnderecoFactory(usuario=self.user)
+        response = self.client.put(reverse('enderecos-detail', kwargs={'pk': str(endereco.uuid)}), {
+            'logradouro': endereco.logradouro,
+            'numero': 999,
+            'estado': endereco.estado,
+            'cidade': endereco.cidade,
+            'bairro': endereco.bairro,
+            'cep': endereco.cep
+        })
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        endereco.refresh_from_db()
+        self.assertEqual(endereco.logradouro, response.data['logradouro'])
+        self.assertEqual(endereco.numero, response.data['numero'])
+        self.assertEqual(endereco.estado, response.data['estado'])
+        self.assertEqual(endereco.cidade, response.data['cidade'])
+        self.assertEqual(endereco.bairro, response.data['bairro'])
+        self.assertEqual(endereco.cep, response.data['cep'])
 
     def test_delete_with_user(self):
         endereco = EnderecoFactory(usuario=self.user)
