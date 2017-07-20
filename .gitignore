@@ -1,8 +1,10 @@
 *.pyc
 .cache
 .coverage
+.DS_Store
 .eggs
 .idea
+docs/_build/
 fe_endereco_server.egg-info
 source/.coverage
 source/db.sqlite3
