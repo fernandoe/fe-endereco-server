@@ -1,18 +1,21 @@
-# -*- coding:utf-8 -*-
 import json
 
 import requests_mock
-from django.core.urlresolvers import reverse
-from django.test import TestCase
-from fe_core.tests.factories import AccessTokenFactory
-from rest_framework.test import APIClient
+from django.urls import reverse
+from fe_core.factories import UserFactory
+from rest_framework.test import APITestCase
+from rest_framework_jwt.settings import api_settings
+
+jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
-class TestServiceCEPAPIView(TestCase):
+class TestServiceCEPAPIView(APITestCase):
     def setUp(self):
-        access_token = AccessTokenFactory()
-        self.client = APIClient()
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(access_token.token))
+        self.user = UserFactory()
+        payload = jwt_payload_handler(self.user)
+        token = jwt_encode_handler(payload)
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
 
     def test_enderecos_cep_get_404(self):
         response = self.client.get(reverse('enderecos-cep', kwargs={'cep': '12345678'}))

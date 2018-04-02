@@ -1,24 +1,28 @@
-from django.core.urlresolvers import reverse
-from django.test import TestCase
-from fe_core.tests.factories import AccessTokenFactory, UserFactory, EntityFactory
+from django.urls import reverse
+from fe_core.factories import UserFactory, EntityFactory
 from rest_framework import status
-from rest_framework.test import APIClient
+from rest_framework.test import APITestCase
+from rest_framework_jwt.settings import api_settings
 
 from fe_endereco.models import Endereco
 from fe_endereco.tests.factories import EnderecoFactory
 
+jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
-class TestEnderecoModelViewSet(TestCase):
+
+class TestEnderecoModelViewSet(APITestCase):
     def setUp(self):
         self.user = UserFactory(entity=None)
-        access_token = AccessTokenFactory(user=self.user)
+        payload = jwt_payload_handler(self.user)
+        user_token = jwt_encode_handler(payload)
 
         self.entity = EntityFactory()
         self.user_with_entity = UserFactory(entity=self.entity)
-        self.access_token_entity = AccessTokenFactory(user=self.user_with_entity)
+        payload = jwt_payload_handler(self.user_with_entity)
+        self.user_with_entity_token = jwt_encode_handler(payload)
 
-        self.client = APIClient()
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(access_token.token))
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + user_token)
 
     def test_create_with_only_user(self):
         response = self.client.post(reverse('enderecos-list'), {
@@ -35,7 +39,7 @@ class TestEnderecoModelViewSet(TestCase):
         self.assertEqual(endereco.usuario, self.user)
 
     def test_create_with_entity(self):
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(self.access_token_entity.token))
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(self.user_with_entity_token))
         response = self.client.post(reverse('enderecos-list'), {
             'logradouro': 'a',
             'numero': 1,
@@ -67,7 +71,7 @@ class TestEnderecoModelViewSet(TestCase):
         self.assertEqual(10, len(entidade))
 
     def test_get_with_entity(self):
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(self.access_token_entity.token))
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(self.user_with_entity_token))
         endereco = EnderecoFactory(usuario=self.user, entidade=self.entity)
         response = self.client.get(reverse('enderecos-detail', kwargs={'pk': str(endereco.uuid)}))
         self.assertEqual(response.status_code, status.HTTP_200_OK)

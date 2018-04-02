@@ -2,7 +2,7 @@ import uuid
 
 import factory
 from faker import Factory
-from fe_core.tests.factories import EntityFactory
+from fe_core.factories import EntityFactory
 
 from fe_endereco.models import Endereco
 

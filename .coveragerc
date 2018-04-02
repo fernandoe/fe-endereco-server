@@ -1,6 +1,6 @@
 [run]
-include = source/*
+include = src/*
 omit =
     */migrations/*
     */tests/*
-    source/server/*
+    src/server/*
