@@ -10,7 +10,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'source'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 setup(
     name='fe-endereco-server',
