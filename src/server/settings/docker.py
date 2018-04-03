@@ -11,7 +11,7 @@ DATABASES = {
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'services.backends.FEMicroservicesBackend',
+        'fe_jwt.backends.FEMicroservicesBackend',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
