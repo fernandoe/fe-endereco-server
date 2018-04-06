@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'corsheaders',
-    'oauth2_provider',
 
     'fe_core',
     'fe_endereco',
@@ -101,7 +100,6 @@ USE_L10N = False
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
@@ -111,17 +109,10 @@ AUTH_USER_MODEL = 'fe_core.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'oauth2_provider.contrib.rest_framework.authentication.OAuth2Authentication',
+        'fe_jwt.backends.FEMicroservicesBackend',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
-}
-
-OAUTH2_PROVIDER = {
-    'RESOURCE_SERVER_INTROSPECTION_URL': 'https://auth.fe.fernandoe.com/api/v1/introspect/',
-    # 'RESOURCE_SERVER_INTROSPECTION_URL': 'http://localhost:7000/api/v1/introspect/',
-    'RESOURCE_SERVER_AUTH_TOKEN': '00000000-c133-46b0-baaf-e0c476732be1',
-    'OAUTH2_VALIDATOR_CLASS': 'fe_core.services.auth.oauth2_validators.FEOAuth2Validator'
 }
