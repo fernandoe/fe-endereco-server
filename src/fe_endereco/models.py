@@ -1,12 +1,13 @@
-from __future__ import unicode_literals
-
+from django.contrib.auth import get_user_model
 from django.db import models
-from fe_core.models import UUIDModel, Entity, User
+from fe_core.models import UUIDModel, Entity
+
+User = get_user_model()
 
 
 class Endereco(UUIDModel):
-    usuario = models.ForeignKey(User)
-    entidade = models.ForeignKey(Entity, null=True, blank=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    entidade = models.ForeignKey(Entity, on_delete=models.CASCADE, null=True, blank=True)
     cep = models.CharField(max_length=10)
     logradouro = models.CharField(max_length=128)
     numero = models.CharField(max_length=32)
