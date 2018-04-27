@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 setup(
     name='fe-endereco-server',
-    version='0.1.0',
+    version='0.0.1',
     description='',
     long_description=README,
     url='https://github.com/fernandoe/fe-endereco-server',
