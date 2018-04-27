@@ -3,3 +3,6 @@ docker-build:
 
 test:
 	python setup.py test
+
+travis.test:
+	docker run --rm -it '${TRAVIS_REPO_SLUG}:${COMMIT}' pytest -s
