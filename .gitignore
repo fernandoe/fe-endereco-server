@@ -4,7 +4,8 @@
 .DS_Store
 .eggs
 .idea
+.pytest_cache/
 docs/_build/
 fe_endereco_server.egg-info
-source/.coverage
-source/db.sqlite3
+src/.coverage
+src/db.sqlite3
