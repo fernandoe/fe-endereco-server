@@ -6,12 +6,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-<<<<<<< HEAD
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'fe_jwt.backends.FEMicroservicesBackendTesting',
     )
 }
-=======
->>>>>>> master
