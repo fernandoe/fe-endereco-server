@@ -1,11 +1,8 @@
 TRAVIS_REPO_SLUG ?= fernandoe/fe-endereco-server
 TAG ?= local
 
-docker-build:
-	docker build -t fernandoe/fe-endereco-server:local .
-
 build:
-	docker build -t fernandoe/fe-endereco-server:local .
+	docker build -t '${TRAVIS_REPO_SLUG}:${TAG}' .
 
 test:
 	cd src; pytest -s
