@@ -1,17 +1,11 @@
-FROM python:3.6.4-alpine
+FROM fernandoe/docker-python:3.6.5-alpine
+LABEL maintainer="Fernando Espíndola <fer.esp@gmail.com>"
 
-RUN apk add --no-cache build-base mariadb-client-libs
-
-RUN apk add --no-cache --virtual .build-deps mariadb-dev git
-
-ADD ./requirements.txt /requirements.txt
-
+COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
-RUN apk del .build-deps
-
-ADD ./docker/run.sh /run.sh
-ADD ./src /app
+COPY ./docker/run.sh /run.sh
+COPY ./src /app
 
 WORKDIR /app
 

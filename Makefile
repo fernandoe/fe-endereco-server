@@ -1,4 +1,4 @@
-TRAVIS_REPO_SLUG ?= fernandoe/fe-endereco-server
+TRAVIS_REPO_SLUG ?= fernandoe/fe-endereco-api
 TAG ?= local
 
 build:
