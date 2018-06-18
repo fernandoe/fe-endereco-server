@@ -12,6 +12,8 @@ script:
 
 after_success:
   - coveralls
+  - docker ps
+  - docker status
 
 #before_install:
 #  - echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
