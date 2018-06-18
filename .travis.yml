@@ -25,21 +25,20 @@ after_success:
   - make coveralls
   - scripts/docker-create-and-deploy-image.sh
 
-#before_install:
-#  - echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-#  - openssl aes-256-cbc -K $encrypted_bca821787209_key -iv $encrypted_bca821787209_iv
-#    -in sandbox/certificates/id_rsa_fe_travis.enc -out deploy-key -d
-#
+#deploy:
+#  # deploy releases branch to their own namespaces
+#  - provider: script
+#    script: ./scripts/k8s-deploy.sh
+#    on:
+#      all_branches: true
+##      branch: release-0.0.2
+#  # deploy master to production
+#  - provider: script
+#    script: ./scripts/deploy.sh
+#    on:
+#      branch: master
 
-#language: generic
-#sudo: required
-#services:
-#- docker
-#
-#
-#before_install:
-#  - echo "$DOCKER_PASS" | docker login -u $DOCKER_USER --password-stdin
-#
+
 #install:
 #  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 #  - docker build -f Dockerfile -t $TRAVIS_REPO_SLUG:$TAG .

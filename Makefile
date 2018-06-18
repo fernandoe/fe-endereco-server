@@ -11,7 +11,7 @@ test:
 	cd src; pytest -s
 
 coveralls:
-	cd src; coveralls
+	cd src; coveralls --verbose
 
 travis.test:
 	docker run --rm -it '${TRAVIS_REPO_SLUG}:${TAG}' pytest -s
