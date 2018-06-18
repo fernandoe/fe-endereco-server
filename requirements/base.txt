@@ -1,0 +1,6 @@
+drf-nested-routers==0.90.0
+ipaddress==1.0.18
+requests==2.18.1
+
+# -e ../django-fe-core/
+git+https://github.com/fernandoe/django-fe-core.git@release/0.1.0#egg=django-fe-core
