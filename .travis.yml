@@ -22,7 +22,7 @@ script:
   - make test
 
 after_success:
-  - coveralls
+  - cd src; coveralls
   - scripts/docker-create-and-deploy-image.sh
 
 #before_install:
