@@ -23,7 +23,7 @@ script:
 
 after_success:
   - coveralls
-  - scripts/docker-create-image.sh
+  - scripts/docker-create-and-deploy-image.sh
 
 #before_install:
 #  - echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
