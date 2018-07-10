@@ -1,8 +1,12 @@
 # Release Notes
 
+
 ## 0.0.2-DEV
 
 - Adjusting configuration app to be equals to the other projects
+- Add docker-compose file to start the app locally
+- Add dump database and start the database with the dump data on it
+- Add k8s files to deploy into the dev stack
 
 
 ## 0.0.1
