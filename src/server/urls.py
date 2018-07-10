@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from django.urls import path, include
 from django.contrib import admin
 from rest_framework_nested import routers
 
@@ -8,8 +8,8 @@ router = routers.SimpleRouter()
 router.register(r'enderecos', EnderecoModelViewSet, base_name="enderecos")
 
 urlpatterns = [
-    url(r'^api/v1/', include(router.urls)),
-    url(r'^api/v1/enderecos/cep/(?P<cep>[0-9]{8})', ServiceCEPAPIView.as_view(), name='enderecos-cep'),
-
-    url(r'^admin/', admin.site.urls),
+    path('api/v1/', include(router.urls)),
+    path('api/v1/enderecos/cep/<int:cep>', ServiceCEPAPIView.as_view(), name='enderecos-cep'),
+    path('admin/', admin.site.urls),
+    path('version', include('fe_version.urls')),
 ]
