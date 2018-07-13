@@ -1,0 +1,17 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: api-endereco-dev-fernandoe-com
+spec:
+  secretName: api-endereco-dev-fernandoe-com-tls
+  issuerRef:
+    name: issuer-letsencrypt
+  commonName: api-endereco.dev.fernandoe.com
+  dnsNames:
+    - api-endereco.dev.fernandoe.com
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - api-endereco.dev.fernandoe.com
