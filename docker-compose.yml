@@ -46,7 +46,7 @@ services:
       DATABASE_URL: mysql://root:password@mysql-api-endereco:3306/endereco
       CONTA_SERVICE_HOST: api-conta
       CONTA_SERVICE_PORT: 8000
-      VERSION: 0.0.2
+      VERSION: release-0.0.2
     stdin_open: true
     tty: true
 
